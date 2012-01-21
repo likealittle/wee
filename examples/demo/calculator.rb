@@ -1,4 +1,6 @@
-require 'demo/messagebox'
+require 'rubygems'
+require 'wee'
+require './demo/messagebox'
 
 class Calculator < Wee::Component
   def initialize

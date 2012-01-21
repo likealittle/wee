@@ -1,14 +1,15 @@
 $LOAD_PATH.unshift "../lib"
+$LOAD_PATH.unshift "./"
 require 'rubygems'
 require 'wee'
 
-$LOAD_PATH.unshift "./demo"
-require 'demo/calculator'
-require 'demo/counter'
-require 'demo/calendar'
-require 'demo/radio'
-require 'demo/file_upload'
-require 'arc_challenge2'
+$LOAD_PATH.unshift "././demo"
+require './demo/calculator'
+require './demo/counter'
+require './demo/calendar'
+require './demo/radio'
+require './demo/file_upload'
+require './arc_challenge2'
 require 'cheese_task'
 
 class ArcChallengeWrapper < Wee::WrapperDecoration
@@ -32,11 +33,11 @@ class Demo < Wee::RootComponent
 
   def initialize
     @components = []
-    @components << E.new(Counter.new, "Counter", 'demo/counter.rb')
-    @components << E.new(Calculator.new, "Calculator", 'demo/calculator.rb')
-    @components << E.new(CustomCalendarDemo.new, "Calendar", 'demo/calendar.rb')
-    @components << E.new(RadioTest.new, "Radio Buttons", 'demo/radio.rb')
-    @components << E.new(FileUploadTest.new, "File Upload", 'demo/file_upload.rb')
+    @components << E.new(Counter.new, "Counter", './demo/counter.rb')
+    @components << E.new(Calculator.new, "Calculator", './demo/calculator.rb')
+    @components << E.new(CustomCalendarDemo.new, "Calendar", './demo/calendar.rb')
+    @components << E.new(RadioTest.new, "Radio Buttons", './demo/radio.rb')
+    @components << E.new(FileUploadTest.new, "File Upload", './demo/file_upload.rb')
 
     if $cc
       # these components need continuations
@@ -130,6 +131,6 @@ if __FILE__ == $0
     $cc = true 
     Wee.run(Demo)
   else
-    Wee.run(Demo, :use_continuations => false)
+    Wee.run(Demo, :use_continuations => false, port: 4000)
   end
 end
