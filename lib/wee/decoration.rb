@@ -225,6 +225,7 @@ module Wee
   end # class FormDecoration
 
   class PageDecoration < WrapperDecoration
+    attr_accessor :title
 
     def initialize(title='', stylesheets=[], javascripts=[])
       @title = title
