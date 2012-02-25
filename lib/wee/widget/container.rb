@@ -11,6 +11,10 @@ module Wee
         self
       end
 
+      def empty
+        @children == []
+      end
+
       def remove_all
         @children = []
       end
