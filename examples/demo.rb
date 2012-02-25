@@ -9,6 +9,7 @@ require './demo/counter'
 require './demo/calendar'
 require './demo/radio'
 require './demo/file_upload'
+require './demo/widget_builder'
 require './arc_challenge2'
 require 'cheese_task'
 
@@ -38,6 +39,7 @@ class Demo < Wee::RootComponent
     @components << E.new(CustomCalendarDemo.new, "Calendar", './demo/calendar.rb')
     @components << E.new(RadioTest.new, "Radio Buttons", './demo/radio.rb')
     @components << E.new(FileUploadTest.new, "File Upload", './demo/file_upload.rb')
+    @components << E.new(WidgetBuilder.new, "Widget Builder", './demo/widget_builder.rb')
 
     if $cc
       # these components need continuations

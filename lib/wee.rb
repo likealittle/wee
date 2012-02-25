@@ -23,6 +23,8 @@ require 'wee/html_document'
 require 'wee/html_brushes'
 require 'wee/html_canvas'
 
+require 'wee/widget/all.rb'
+
 if RUBY_VERSION >= "1.9"
   begin
     require 'continuation'
