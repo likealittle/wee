@@ -6,6 +6,9 @@ module Wee
       end
 
       def add(child)
+        if (child.nil?) 
+          raise "child is nil"
+        end
         @children << child
         self
       end

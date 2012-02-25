@@ -20,6 +20,7 @@ module Wee
       end
 
       def render(r)
+        r.hidden_input.name("last_clicked")
         r.form.enctype_multipart.with do
           r.render @child
         end

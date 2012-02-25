@@ -7,7 +7,6 @@ module Wee
 
       def initialize
         @text = ""
-        @click_handler = nil
       end
 
       def text(str)
@@ -28,18 +27,21 @@ module Wee
       end
 
       def state(s)
-        super
         s.add(@text)
+        super
       end
 
-      def callback(value)
-        @text = value
+      def callback(*args)
+        if (args.length == 1)
+          @text = args[0]
+        end
       end
 
       def render(r)
+        super(r)
         puts "rendering text box with value #{@text}"
         t = render_main(r).value(@text).callback_method(:callback)
-        render_click_handler(t)
+        render_click_handler(r, t)
       end
 
       def render_main(r)

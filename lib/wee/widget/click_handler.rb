@@ -10,17 +10,23 @@ module Wee
         self
       end
 
-      def render_click_handler(t)
+      def render_click_handler(r, t)
         if click_handlers.size > 0
           puts "actually adding a click handler"
-          t.onclick_javascript("this.form.submit()")
-          t.callback {
-            click_handlers.each { |c|
-              c.call
-            }
+
+          # t.onclick_javascript("this.form.last_clicked.value = '#{t.get_oid}'; this.form.submit()")
+
+          t.onclick_callback {
+            run_click_handlers
           }
         end
+        self
+      end
 
+      def run_click_handlers
+        click_handlers.each { |c|
+          c.call
+        }
       end
     end
   end

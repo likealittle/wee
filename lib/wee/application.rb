@@ -59,6 +59,12 @@ module Wee
         url = request.build_url(:session_id => session.id, :page_id => nil)
         Wee::RedirectResponse.new(url).finish
       end
+    rescue => e
+      puts e.message
+      e.backtrace.each { |i|
+        puts "  #{i}"
+      }
+      raise e
     end
 
     protected
