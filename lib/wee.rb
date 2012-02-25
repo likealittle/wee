@@ -49,6 +49,7 @@ def Wee.run(component_class=nil, params=nil, &block)
   params[:use_continuations] ||= true
   params[:print_message] ||= false
   params[:autoreload] ||= false
+  params[:rack_handler] ||= Rack::Handler.default
 
   if component_class <= Wee::RootComponent
     component_class.external_resources.each do |ext_res|  
@@ -107,5 +108,5 @@ def Wee.run(component_class=nil, params=nil, &block)
     io.puts
   end
 
-  Rack::Handler.default.run(app, :Port => params[:port])
+  params[:rack_handler].run(app, :Port => params[:port])
 end
