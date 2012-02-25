@@ -11,6 +11,10 @@ module Wee
         self
       end
 
+      def remove_all
+        @children = []
+      end
+
       def render(r)
         r.div.with {
           @children.each { |c|

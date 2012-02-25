@@ -1,3 +1,7 @@
 require "wee/widget/text_box"
 require "wee/widget/container"
 require "wee/widget/button"
+require "wee/widget/label"
+require "wee/widget/vertical_layout"
+require "wee/widget/horizontal_layout"
+require "wee/widget/tab_layout"
