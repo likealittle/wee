@@ -16,24 +16,45 @@ module Wee
       end
 
       def add(child, name)
-        puts "adding this child to tab layout"
-        l = Link.new(name) 
-        l.onclick {
-          puts "setting current view to #{name}"
-          set_current_view(child)
-        }
-
-        @menu_l.add(l)
+        @menus[name] = child
         if current_view_container.empty
           set_current_view(child)
+        else
+          generate_menus(get_current_view)
         end
 
         self
       end
 
+      def generate_menus(current_view)
+        @menu_l.remove_all
+        @menus.each_pair { |name, child|
+          puts "adding this child #{name} to tab layout"
+          l = nil
+          if (child != current_view)
+            l = Link.new(name) 
+            l.onclick {
+              puts "setting current view to #{name}"
+              set_current_view(child)
+            }
+          else 
+            l = Label.new(name)
+          end
+
+          @menu_l.add(l)
+        }
+      end
+
+
+      def get_current_view
+        @current_view
+      end
+
       def set_current_view(view)
+        @current_view = view
         current_view_container.remove_all
         current_view_container.add(view)
+        generate_menus(view)
       end
     end
   end
