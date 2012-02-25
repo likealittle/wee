@@ -2,6 +2,7 @@ module Wee
   module Widget
     # a widget that is created from other widgets.
     class RootComposite < Wee::RootComponent
+      include WidgetDsl
       def initialize
         super
         @child = create

@@ -6,40 +6,39 @@ class WidgetBuilder < Wee::Widget::RootComposite
   def create
     puts "initializing widget builder"
     add_decoration Wee::StyleDecoration.new(self)
-    ret = TabLayout.new
 
-    @tab1 = VerticalLayout.new
-    @tb1 = TextBox.new("click test to double")
-    @tb2 = Button.new("test")
-    @tab1.add(Label.new("type text and click test"))
-    @tab1.add(@tb1)
-    @tab1.add(@tb2)
+    w(:tab_layout, :name => :top).add(
+      "Tab 1" => w(:vertical_layout).add(
+        w(:text_box, :text => "click test to double", :name => :tb1),
+        w(:button, :text => "test", :name => :tb2)),
+      "Tab 2" => w(:container).add(
+        w(:label, :name => :label1, :text => "second tab"),
+        w(:text_box, :name => :textbox, :text => "can be clicked"),
+        w(:text_box, :name => :textbox2, :text => "can also be clicked"))
+      )
+    
+    puts "creation done"
 
-    @tb2.onclick {
+    f(:tb2).onclick {
       puts "callback called"
-      @tb1.text(@tb1.get_text + @tb1.get_text)
+      @tb1.text = (@tb1.get_text + @tb1.get_text)
     }
 
-    @tab2 = Container.new.add(@label1 = Label.new("second tab")).add(@textbox = TextBox.new("can be clicked"))
-    @textbox2 = TextBox.new("can also be clicked")
-    @tab2.add(@textbox2)
+    puts "on click handler now"
 
-    ret.add(@tab1, "Tab 1")
-    ret.add(@tab2, "Tab 2")
-
-    @textbox.onclick {
-      @textbox.text = "is clicked"
+    f(:textbox).onclick {
+      f(:textbox).text = "is clicked"
     }
     
-    @textbox.onclick {
-      @label1.text = "aha, second callback"
+    f(:textbox).onclick {
+      f(:label1).text = "aha, second callback"
     }
 
-    @textbox2.onclick {
-      @textbox2.text = "nothing else should've changed!"
+    f(:textbox2).onclick {
+      f(:textbox2).text = "nothing else should've changed!"
     }
 
-    ret
+    f(:top)
   end
 
   def style

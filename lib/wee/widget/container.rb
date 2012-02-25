@@ -5,7 +5,7 @@ module Wee
         @children = []
       end
 
-      def add(child)
+      def add_one(child)
         if (child.nil?) 
           raise "child is nil"
         end
@@ -16,6 +16,18 @@ module Wee
 
         @children << child
         self
+      end
+
+      def add_all(*args)
+        p "adding all: #{args.inspect}"
+        args.each { |c|
+          add_one(c)
+        }
+        self
+      end
+
+      def add(*args)
+        add_all(*args)
       end
 
       def empty
@@ -35,7 +47,7 @@ module Wee
       end
 
       def children
-        puts "chilren being called"
+        puts "chilren being called on #{self.inspect}, and would return #{@children.inspect}"
         @children
       end
     end

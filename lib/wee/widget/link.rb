@@ -4,6 +4,7 @@ module Wee
       include ClickHandler
 
       def initialize(str = nil)
+        super()
         if (str)
           self.text = str
         end

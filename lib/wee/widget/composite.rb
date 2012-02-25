@@ -1,7 +1,10 @@
+require "wee/widget/widget_dsl"
 module Wee
   module Widget
     # a widget that is created from other widgets.
     class Composite < Wee::Component
+      include WidgetDsl
+
       def initialize
         super
         @child = create

@@ -2,20 +2,27 @@ module Wee
   module Widget
     class TabLayout < Composite
       def create
-        @hl = HorizontalLayout.new
-        @menu_l = VerticalLayout.new
-
-        @hl.add(@menu_l)
-        @hl.add(current_view_container)
         @menus = {}
-        @hl
+        puts "creating tab layout"
+        w(:horizontal_layout, :name => :hl).add_all(
+          w(:vertical_layout, :name => :menu_l),
+          w(:container, :name => :current_view_container))
       end
 
       def current_view_container
-        @current_view_container ||= Container.new
+        f(:current_view_container)
       end
 
-      def add(child, name)
+      def add(child, name = nil)
+        if (child.is_a? Hash)
+          add_hash(child)
+          return
+        end
+
+        if child.nil?
+          raise "nil child for tab layout"
+        end
+
         @menus[name] = child
         if current_view_container.empty
           set_current_view(child)
@@ -26,22 +33,38 @@ module Wee
         self
       end
 
+      def add_hash(hash)
+        hash.each_pair { |k, v| 
+          add(v, k)
+        }
+        self
+      end
+
+      def add_all(*args)
+        raise "not supported"
+      end
+
+      def add_one(*args)
+        raise "not supported"
+      end
+
       def generate_menus(current_view)
-        @menu_l.remove_all
+        p "Current menus is #{@menus}"
+        f(:menu_l).remove_all
         @menus.each_pair { |name, child|
           puts "adding this child #{name} to tab layout"
           l = nil
           if (child != current_view)
-            l = Link.new(name) 
+            l = w(:link, :text => name) 
             l.onclick {
               puts "setting current view to #{name}"
               set_current_view(child)
             }
           else 
-            l = Label.new(name)
+            l = w(:label, :text => name)
           end
 
-          @menu_l.add(l)
+          f(:menu_l).add(l)
         }
       end
 

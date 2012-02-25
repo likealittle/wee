@@ -16,6 +16,7 @@ module Wee
 
       # name is a programmatic name, and will not show up in the external HTML
       def w(type, params = {})
+        puts "creating #{type.inspect} with #{params.inspect}"
         klass = eval(camelize(type.to_s))
         widget = klass.new
 
