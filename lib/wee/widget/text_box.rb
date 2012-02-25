@@ -5,30 +5,25 @@ module Wee
     class TextBox < Wee::Component
       include ClickHandler
 
-      def initialize
-        @text = ""
+      def initialize(str = nil)
+        self.text = str || ""
       end
 
-      def text(str)
+      def text=(str)
         @text = str
         self
       end
 
-      def text=(str)
-        text(str)
+      def text
+        @text ||= ""
       end
 
       def get_text
-        @text
+        text
       end
 
       def children
         []
-      end
-
-      def state(s)
-        s.add(@text)
-        super
       end
 
       def callback(*args)

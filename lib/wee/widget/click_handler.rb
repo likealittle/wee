@@ -11,6 +11,10 @@ module Wee
       end
 
       def render_click_handler(r, t)
+        if t.nil?
+          raise "t cannot be nil in render_click_handler"
+        end
+
         if click_handlers.size > 0
           puts "actually adding a click handler"
 

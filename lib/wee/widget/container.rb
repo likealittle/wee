@@ -9,6 +9,11 @@ module Wee
         if (child.nil?) 
           raise "child is nil"
         end
+
+        if (!child.is_a?(Wee::Component))
+          raise "you can only add a Wee::Component to a container, not a #{child.inspect}"
+        end
+
         @children << child
         self
       end
@@ -22,7 +27,7 @@ module Wee
       end
 
       def render(r)
-        r.div.with {
+        r.span.with {
           @children.each { |c|
             r.render c
           }

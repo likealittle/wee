@@ -17,7 +17,7 @@ module Wee
 
       def add(child, name)
         puts "adding this child to tab layout"
-        l = Button.new.text(name) 
+        l = Link.new(name) 
         l.onclick {
           puts "setting current view to #{name}"
           set_current_view(child)

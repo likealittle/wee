@@ -1,23 +1,25 @@
 module Wee
   module Widget
     class Label < Wee::Component
-      def initialize
+      def initialize(str = nil)
         @text = ""
         @click_handler = nil
-      end
-
-      def text(str)
-        @text = str
-        self
+        if (str)
+          self.text = str
+        end
       end
 
       def text=(str)
-        text(str)
+        @text = str
         str
       end
 
+      def text
+        @text ||= ""
+      end
+
       def get_text
-        @text
+        text
       end
       
       def render(r)
