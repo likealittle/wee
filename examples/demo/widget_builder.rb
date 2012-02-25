@@ -21,7 +21,7 @@ class WidgetBuilder < Wee::Widget::RootComposite
 
     f(:tb2).onclick {
       puts "callback called"
-      @tb1.text = (@tb1.get_text + @tb1.get_text)
+      f(:tb1).text = f(:tb1).text + f(:tb1).text
     }
 
     puts "on click handler now"
