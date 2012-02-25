@@ -20,10 +20,14 @@ class WidgetBuilder < Wee::Widget::TabLayout
       @tb1.text(@tb1.get_text + @tb1.get_text)
     }
 
-    @tab2 = FrameContainer.new.set(Label.new.text("second tab"))
+    @tab2 = Container.new.add(Label.new.text("second tab")).add(@textbox = TextBox.new.text("can be clicked"))
 
     add(@tab1, "Tab 1")
     add(@tab2, "Tab 2")
+
+    @textbox.onclick {
+      @textbox.text = "is clicked"
+    }
   end
 
   def style

@@ -12,6 +12,10 @@ module Wee
         self
       end
 
+      def text=(str)
+        text(str)
+      end
+
       def get_text
         @text
       end
@@ -40,6 +44,7 @@ module Wee
 
         if @click_handler
           puts "actually adding a click handler"
+          t.onclick_javascript("this.form.submit()")
           t.callback {
             puts "in here"
             @click_handler.call
