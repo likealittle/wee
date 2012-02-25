@@ -16,7 +16,7 @@ module Wee
       end
       
       def render(r)
-        puts "rendering text box with value #{@text}"
+        puts "rendering label with value #{@text}"
         t = r.span(@text)
 
         if @click_handler
