@@ -11,6 +11,11 @@ module Wee
         self
       end
 
+      def text=(str)
+        text(str)
+        str
+      end
+
       def get_text
         @text
       end

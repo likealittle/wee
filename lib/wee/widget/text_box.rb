@@ -1,7 +1,10 @@
 
+require "wee/widget/click_handler"
 module Wee
   module Widget
     class TextBox < Wee::Component
+      include ClickHandler
+
       def initialize
         @text = ""
         @click_handler = nil
@@ -20,11 +23,6 @@ module Wee
         @text
       end
 
-      def onclick
-        @click_handler = lambda { yield }
-        self
-      end
-      
       def children
         []
       end
@@ -41,15 +39,7 @@ module Wee
       def render(r)
         puts "rendering text box with value #{@text}"
         t = render_main(r).value(@text).callback_method(:callback)
-
-        if @click_handler
-          puts "actually adding a click handler"
-          t.onclick_javascript("this.form.submit()")
-          t.callback {
-            puts "in here"
-            @click_handler.call
-          }
-        end
+        render_click_handler(t)
       end
 
       def render_main(r)
