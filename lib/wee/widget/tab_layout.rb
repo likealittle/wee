@@ -1,8 +1,7 @@
 module Wee
   module Widget
-    class TabLayout < Wee::Component
-      def initialize
-        super
+    class TabLayout < Composite
+      def create
         @hl = HorizontalLayout.new
         @menu_l = VerticalLayout.new
 
@@ -10,6 +9,7 @@ module Wee
         @hl.add(@menu_l)
         @hl.add(@current_view_container)
         @menus = {}
+        @hl
       end
 
       def add(child, name)
@@ -27,14 +27,6 @@ module Wee
       def set_current_view(view)
         @current_view_container.remove_all
         @current_view_container.add(view)
-      end
-
-      def render(r)
-        r.render(@hl)
-      end
-
-      def children
-        [@hl]
       end
     end
   end
