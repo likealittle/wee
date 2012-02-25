@@ -107,5 +107,5 @@ def Wee.run(component_class=nil, params=nil, &block)
     io.puts
   end
 
-  Rack::Handler::WEBrick.run(app, :Port => params[:port])
+  Rack::Handler.default.run(app, :Port => params[:port])
 end
