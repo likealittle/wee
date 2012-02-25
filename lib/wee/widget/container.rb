@@ -2,7 +2,6 @@ module Wee
   module Widget
     class Container < Wee::Component
       def initialize
-        @text = ""
         @children = []
       end
 
