@@ -19,6 +19,8 @@ module Wee
           return
         end
 
+        raise "unsupported widget type" unless (child.respond_to?(:call) || child.is_a?(Wee::Component))
+
         if child.nil?
           raise "nil child for tab layout"
         end
@@ -76,8 +78,10 @@ module Wee
       def set_current_view(view)
         @current_view = view
         current_view_container.remove_all
+        view = view.is_a?(Wee::Component) ? view : view.call
+
         current_view_container.add(view)
-        generate_menus(view)
+        generate_menus(@current_view)
       end
     end
   end

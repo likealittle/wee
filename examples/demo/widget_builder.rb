@@ -14,7 +14,12 @@ class WidgetBuilder < Wee::Widget::RootComposite
       "Tab 2" => w(:container).add(
         w(:label, :name => :label1, :text => "second tab"),
         w(:text_box, :name => :textbox, :text => "can be clicked"),
-        w(:text_box, :name => :textbox2, :text => "can also be clicked"))
+        w(:text_box, :name => :textbox2, :text => "can also be clicked")),
+      "Lazy tab 3" => lambda {
+        res = w(:vertical_layout).add(w(:label, :text => rand().to_s), w(:button, :name => :dn))
+        f(:dn).onclick { }
+        res
+      }
       )
     
     puts "creation done"
