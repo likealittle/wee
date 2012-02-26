@@ -29,7 +29,8 @@ class WidgetBuilder < Wee::Widget::RootComposite
         f(:dn).onclick { }
         res
       },
-      "Autocomplete" => AutocompleteTest.new
+      "Autocomplete" => AutocompleteTest.new,
+      "Table" => w(:tabular).add_row(Label.new("one"), Label.new("two")).add_row(Label.new("three"), Label.new("four"))
 
       )
     
