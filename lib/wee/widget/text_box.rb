@@ -51,7 +51,11 @@ module Wee
       end
       
       def ontextchange(component = nil)
-        @ontextchange = lambda { yield }
+        @ontextchange = lambda { 
+          handler.add {
+            yield
+          }
+        }
         @ontextchange_component = component
       end
 
