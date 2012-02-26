@@ -143,6 +143,10 @@ module Wee
     end
 
     def update_component_on(event, component=nil, &callback_block)
+      custom_update_component_on(event, "", component, callback_block)
+    end
+
+    def custom_update_component_on(event, javascript = "", component=nil, &callback_block)
       component ||= @canvas.current_component
 
       render_block = proc {|r|
@@ -151,9 +155,10 @@ module Wee
       }
 
       url = @canvas.url_for_callback(@canvas.session.render_ajax_proc(render_block, component))
-      javascript_on(event, "wee.update('#{ url }')")
+      javascript_on(event, "#{javascript}; wee.update('#{ url }')")
       self
     end
+
 
     def onclick_javascript(v)
       javascript_on(:click, v)

@@ -34,14 +34,26 @@ module Wee
 
       def my_callback(*args)
         puts "text box callback"
+        newtext = nil
         if (args.length == 1)
-          @text = args[0]
+          newtext = args[0]
+        else
+          return
         end
+
+        if (@text != newtext and @ontextchange)
+          handler.add {
+            @ontextchange.call()
+          }
+        end
+
+        @text = newtext
         super(*args)
       end
-
-      def update_component_on_change(component)
-        @update_component_on_change = [component, lambda { yield }]
+      
+      def ontextchange(component = nil)
+        @ontextchange = lambda { yield }
+        @ontextchange_component = component
       end
 
       def render(r)
@@ -52,10 +64,9 @@ module Wee
           t = render_main(r).oid.value(@text).callback_method(:my_callback)
         }
 
-        if (@update_component_on_change)
-          t.update_component_on(:keyup, @update_component_on_change[0]) {
-            @update_component_on_change[1].call
-          }
+        if @ontextchange
+          # t.javascript_on(:keyup, "wee.post_callback(true)") 
+          t.custom_update_component_on(:keyup, "wee.post_callback(true, true)", @ontextchange_component)
         end
       end
 

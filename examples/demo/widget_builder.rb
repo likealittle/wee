@@ -68,8 +68,9 @@ class AutocompleteTest < Wee::Widget::Composite
       w(:text_box, :name => :t),
       w(:label, :name => :l))
 
-    f(:t).update_component_on_change(f(:l)) {
-      f(:l).text = "woo"
+    f(:t).ontextchange(f(:l)) {
+      puts "TEXT CHANGED SUCKERS!"
+      f(:l).text = "woo" + f(:t).text
     }
     r
   end
