@@ -60,7 +60,7 @@ module Wee
         if click_handlers.size > 0
           puts "actually adding a click handler"
 
-          t.onclick_javascript("document.getElementById('#{@click_handler_hidden_oid}').value = 'true'; this.form.submit();")
+          t.onclick_javascript("document.getElementById('#{@click_handler_hidden_oid}').value = 'true'; wee.post_callback()")
           
           t.callback_method(:my_callback)
         end

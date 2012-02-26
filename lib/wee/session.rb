@@ -310,7 +310,7 @@ module Wee
         end
         if action_callback
           action_callback.call
-        elsif request.ajax?
+        elsif request.ajax? 
           #
           # An action request with an action-id without a corresponding
           # registered action callback is considered an invalid request.
@@ -323,7 +323,7 @@ module Wee
           # callback id has already been unregistered by the previous
           # request.
           #
-          return NotFoundResponse.new
+          # return NotFoundResponse.new # removed by Arnold, since I do want to do AJAX posts
         end
       rescue AbortProcessing => abort
         page = @page # CONTINUATIONS!

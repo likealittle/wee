@@ -219,7 +219,7 @@ module Wee
     def global?() true end
 
     def render(r)
-      r.form { render_inner(r) }
+      r.form.oid.with { render_inner(r) }
     end
 
   end # class FormDecoration
