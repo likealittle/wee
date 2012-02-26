@@ -1,4 +1,3 @@
-require "wee/widget/callback_handler"
 module Wee
   module Widget
     module ClickHandler
