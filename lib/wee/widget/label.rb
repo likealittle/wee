@@ -24,8 +24,8 @@ module Wee
       
       def render(r)
         puts "rendering label with value #{@text}"
-        t = r.span(@text)
-
+        t = r.span.oid.with(@text);
+        
         if @click_handler
           puts "actually adding a click handler"
           t.callback {

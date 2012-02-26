@@ -1,3 +1,7 @@
+$: << "../lib"
+$: << "."
+require "wee"
+
 class Pager < Wee::Component
   attr_accessor :num_entries, :entries_per_page
   attr_reader :current_page

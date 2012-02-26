@@ -6,6 +6,8 @@ module Wee
       def initialize
         super
         @child = create
+     #   add_decoration Wee::PageDecoration.new
+        add_decoration Wee::FormDecoration.new
       end
 
       def title
@@ -21,10 +23,10 @@ module Wee
       end
 
       def render(r)
+        r.javascript.with(File.open(File.dirname(__FILE__) + "/../jquery/jquery-1.3.2.min.js").read)
+        r.javascript.with(File.open(File.dirname(__FILE__) + "/../jquery/wee-jquery.js").read)
         r.hidden_input.name("last_clicked")
-        r.form.enctype_multipart.with do
-          r.render @child
-        end
+        r.render @child
       end
 
       def process_callbacks(*args)

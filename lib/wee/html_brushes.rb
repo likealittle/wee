@@ -118,7 +118,8 @@ module Wee
               :dblclick => 'ondblclick'.freeze,
               :mouseover => 'onmouseover'.freeze,
               :mouseout => 'onmouseout'.freeze,
-              :change => 'onchange'.freeze}.freeze
+              :change => 'onchange'.freeze,
+      :keyup => "onkeyup".freeze}.freeze
 
     def javascript_on(event, javascript)
       ev = EVENTS[event] 

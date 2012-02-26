@@ -1,11 +1,20 @@
+$: << "../lib/"
+
+require "wee"
+
 class WidgetBuilder < Wee::Widget::RootComposite
   include Wee::Widget
 
   attr_accessor :count
+  def initialize
+ 
+#    add_decoration Wee::StyleDecoration.new(self)
+
+    super
+  end
 
   def create
     puts "initializing widget builder"
-    add_decoration Wee::StyleDecoration.new(self)
 
     w(:tab_layout, :name => :top).add(
       "Tab 1" => w(:vertical_layout).add(
@@ -19,7 +28,9 @@ class WidgetBuilder < Wee::Widget::RootComposite
         res = w(:vertical_layout).add(w(:label, :text => rand().to_s), w(:button, :name => :dn))
         f(:dn).onclick { }
         res
-      }
+      },
+      "Autocomplete" => AutocompleteTest.new
+
       )
     
     puts "creation done"
@@ -49,4 +60,21 @@ class WidgetBuilder < Wee::Widget::RootComposite
   def style
     ".wee-Counter a { border: 1px dotted blue; margin: 2px; }"
   end
+end
+
+class AutocompleteTest < Wee::Widget::Composite
+  def create
+    r = w(:container).add(
+      w(:text_box, :name => :t),
+      w(:label, :name => :l))
+
+    f(:t).update_component_on_change(f(:l)) {
+      f(:l).text = "woo"
+    }
+    r
+  end
+end
+
+if __FILE__ == $0
+  Wee.run(WidgetBuilder, port: 4000)
 end
