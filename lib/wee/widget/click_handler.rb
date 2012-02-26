@@ -24,12 +24,7 @@ module Wee
         if (click_handlers.size > 0)
           # render a hidden tag
           @click_handler_hidden_tag = r.hidden_input
-          @click_handler_hidden_tag.oid.callback { |val|
-            if (val == "true") 
-              puts "got a callback"
-              @is_clicked = true
-            end
-          }
+          @click_handler_hidden_tag.oid.callback_method(:my_click_callback)
           @click_handler_hidden_oid = @click_handler_hidden_tag.get_oid
         end
       end
@@ -40,8 +35,10 @@ module Wee
         render_after_click_handler(r, t)
       end
 
-      def my_callback(*args)
-        if (@is_clicked)
+      def my_click_callback(*args)
+        puts "my click callback called for #{self.inspect}"
+        if (args[0] == "true") 
+          # we are clicked
           puts "is clicked is true! for #{self.inspect}"
           @is_clicked = nil
           handler.add {
@@ -61,8 +58,6 @@ module Wee
           puts "actually adding a click handler"
 
           t.onclick_javascript("document.getElementById('#{@click_handler_hidden_oid}').value = 'true'; wee.post_callback()")
-          
-          t.callback_method(:my_callback)
         end
         self
       end

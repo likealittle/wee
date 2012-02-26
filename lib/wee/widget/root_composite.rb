@@ -1,13 +1,20 @@
 module Wee
   module Widget
     # a widget that is created from other widgets.
+
+    class MyFormDecoration < FormDecoration
+      def render(r)
+        r.form.oid.onsubmit("javascript: return false;").with { render_inner(r) }
+      end
+    end
+
     class RootComposite < Wee::RootComponent
       include WidgetDsl
       def initialize
         super
         @child = create
      #   add_decoration Wee::PageDecoration.new
-        add_decoration Wee::FormDecoration.new
+        add_decoration MyFormDecoration.new
       end
 
       def title

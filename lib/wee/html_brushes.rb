@@ -371,6 +371,7 @@ module Wee
 
     html_attr :action
     html_attr :enctype
+    html_attr :onsubmit
 
     #
     # Use this enctype when you have a FileUploadTag field.

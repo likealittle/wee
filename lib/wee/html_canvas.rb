@@ -221,7 +221,6 @@ module Wee
     protected
 
     def set_brush(brush)
-      puts "set_brush called"
       brush.setup(self, @document)
 
       @current_brush.close if @current_brush
@@ -231,7 +230,6 @@ module Wee
     end
 
     def handle(brush, *args, &block)
-      puts "handl0 called"
       if block or not args.empty?
         set_brush(brush)
         brush.with(*args, &block) 
@@ -241,7 +239,6 @@ module Wee
     end
 
     def handle2(brush, &block)
-      puts "handle2 called"
       if block
         set_brush(brush)
         brush.with(&block) 

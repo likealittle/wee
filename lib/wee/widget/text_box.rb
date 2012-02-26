@@ -48,7 +48,6 @@ module Wee
         end
 
         @text = newtext
-        super(*args)
       end
       
       def ontextchange(component = nil)

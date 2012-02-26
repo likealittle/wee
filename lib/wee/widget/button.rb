@@ -20,17 +20,18 @@ module Wee
       end
 
       def render(r)
-        t = r.submit_button.oid.value(text)
-        render_click_handler(r, t)
+        render_click_handler(r) {
+          t = r.submit_button.oid.value(text)
+        }
       end
 
-      def render_click_handler(r, t)
-        if click_handlers.size > 0
-          t.callback {
-            run_click_handlers
-          }
-        end
-      end
+      # def render_click_handler(r, t)
+      #   if click_handlers.size > 0
+      #     t.callback {
+      #       run_click_handlers
+      #     }
+      #   end
+      # end
     end
   end
 end
