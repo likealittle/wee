@@ -26,17 +26,20 @@ module Wee
         []
       end
 
-      def callback(*args)
+      def my_callback(*args)
+        puts "text box callback"
         if (args.length == 1)
           @text = args[0]
         end
+        super(*args)
       end
 
       def render(r)
         super(r)
         puts "rendering text box with value #{@text}"
-        t = render_main(r).value(@text).callback_method(:callback)
-        render_click_handler(r, t)
+        render_click_handler(r) {
+          render_main(r).value(@text).callback_method(:my_callback)
+        }
       end
 
       def render_main(r)

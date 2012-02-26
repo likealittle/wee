@@ -55,7 +55,7 @@ module Wee
           puts "adding this child #{name} to tab layout"
           l = nil
           if (child != current_view)
-            l = w(:link, :text => name) 
+            l = w(:button, :text => name) 
             l.onclick {
               puts "setting current view to #{name}"
               set_current_view(child)

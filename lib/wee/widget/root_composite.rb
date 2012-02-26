@@ -26,6 +26,14 @@ module Wee
           r.render @child
         end
       end
+
+      def process_callbacks(*args)
+        ret = super(*args)
+        if (@child.respond_to? :handle)
+          @child.handle
+        end
+        ret
+      end
     end
   end
 end

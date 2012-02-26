@@ -25,8 +25,10 @@ module Wee
       end
 
       def render(r)
-        t = r.anchor
-        render_click_handler(r, t)
+        t = nil
+        render_click_handler(r) {
+          t = r.anchor
+        }
         t.with {
           super(r)
         }

@@ -21,6 +21,14 @@ module Wee
       def render(r)
         r.render @child
       end
+
+      def handle
+        children.each { |c|
+          if c.respond_to? :handle
+            c.handle
+          end
+        }
+      end
     end
   end
 end

@@ -1,4 +1,5 @@
 
+require "wee/widget/handler"
 require "wee/widget/container"
 require "wee/widget/text_box"
 require "wee/widget/link"

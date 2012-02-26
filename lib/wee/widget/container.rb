@@ -47,8 +47,15 @@ module Wee
       end
 
       def children
-        puts "chilren being called on #{self.inspect}, and would return #{@children.inspect}"
         @children
+      end
+
+      def handle
+        children.each { |c|
+          if c.respond_to? :handle
+            c.handle
+          end
+        }
       end
     end
   end
