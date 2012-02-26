@@ -9,7 +9,10 @@ module Wee
         @rows << args
         self
       end
-
+      
+      def remove_all
+        @rows = []
+      end
 
       def children
         @rows.flatten(1)
