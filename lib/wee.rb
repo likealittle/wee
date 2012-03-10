@@ -46,7 +46,9 @@ def Wee.run(component_class=nil, params=nil, &block)
   params[:port] ||= 2000
   params[:public_path] ||= nil
   params[:additional_builder_procs] ||= []
-  params[:use_continuations] ||= true
+  if params[:use_continuations].nil? 
+    params[:use_continuations] = true
+  end
   params[:print_message] ||= false
   params[:autoreload] ||= false
   params[:rack_handler] ||= Rack::Handler.default
